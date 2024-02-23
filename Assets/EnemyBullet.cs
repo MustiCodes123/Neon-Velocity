@@ -6,12 +6,15 @@ public class EnemyBullet : MonoBehaviour
     public float speed = 70f; // Speed of the bullet
 
     public GameObject impactEffect; // Effect to show on impact
+    public AudioClip destroySound; // Sound to play on bullet destruction
+
+    private bool hasPlayedSound = false; // Flag to track whether the sound has been played
 
     private void Update()
     {
         if (target == null)
         {
-            Destroy(gameObject); // Destroy the bullet if the target is null
+            DestroyBullet();
             return;
         }
 
@@ -24,34 +27,37 @@ public class EnemyBullet : MonoBehaviour
             return;
         }
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World); // Move the bullet towards the target
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Assuming the player has the "Player" tag
+        if (other.CompareTag("Player"))
         {
-            // Decrease the player's health when hit by the bullet
             other.GetComponent<TakeDamage>().TakeDamageForPlayer(5);
-
-            // Destroy the bullet after hitting the player
-            Destroy(gameObject);
+            DestroyBullet();
         }
     }
 
     public void Seek(Transform _target)
     {
-        target = _target; // Set the target for the bullet to seek
+        target = _target;
     }
 
     private void HitTarget()
     {
         GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectInstance, 2f); // Destroy impact effect after 2 seconds
+        Destroy(effectInstance, 2f);
+        DestroyBullet();
+    }
 
-        // Deal damage to the target or perform any other desired action
-        // For example, you might have a Health script attached to the player that decreases health when hit by a bullet.
-
-        Destroy(gameObject); // Destroy the bullet after hitting the target
+    private void DestroyBullet()
+    {
+        if (!hasPlayedSound && destroySound != null)
+        {
+            AudioSource.PlayClipAtPoint(destroySound, transform.position);
+            hasPlayedSound = true;
+        }
+        Destroy(gameObject);
     }
 }

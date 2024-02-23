@@ -1,41 +1,30 @@
 using UnityEngine;
 
-public class GameObjectManager : MonoBehaviour
+public class PathManager : MonoBehaviour
 {
     // Game object prefab to spawn
-    public GameObject gameObjectPrefab;
+    public GameObject pathPrefab;
 
-    // Z-coordinate at which to spawn the object
-    public float spawnZ = 30f;
+    // Length of each path segment
+    public float pathSegmentLength = 200f;
 
-    // Reference to the player's transform
-    private Transform playerTransform;
+    // Total length of the path
+    public float totalPathLength = 1000f;
 
-    // Flag to track if the object has been spawned
-    private bool objectSpawned = false;
-
+    // Start is called before the first frame update
     void Start()
     {
-        // Find the player's transform by tag
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+        // Calculate the number of segments needed based on total path length and segment length
+        int numSegments = Mathf.FloorToInt(totalPathLength / pathSegmentLength);
 
-    void Update()
-    {
-        // Check if the object has not been spawned and the player has moved forward enough
-        if (!objectSpawned && playerTransform.position.z >= spawnZ)
+        // Spawn the path segments
+        for (int i = 0; i < numSegments; i++)
         {
-            // Spawn the object
-            SpawnGameObject();
+            // Calculate the position for the current path segment
+            Vector3 spawnPosition = new Vector3(0f, 0f, (i + 1) * pathSegmentLength);
 
-            // Set the flag to true to prevent spawning again
-            objectSpawned = true;
+            // Instantiate the path prefab at the calculated position
+            Instantiate(pathPrefab, spawnPosition, Quaternion.identity);
         }
-    }
-
-    void SpawnGameObject()
-    {
-        // Instantiate the game object at the specified position
-        Instantiate(gameObjectPrefab, new Vector3(0f, 0f, spawnZ), Quaternion.identity);
     }
 }
