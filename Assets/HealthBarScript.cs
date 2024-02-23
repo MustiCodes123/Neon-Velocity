@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
 
+    public bool isInvincible = false; // Flag to track invincibility
+    private float invincibilityDuration = 0f; // Duration of invincibility
+    private float invincibilityTimer = 0f; // Timer for invincibility
+
+    public Text invincibilityTimerText;
+
     public Slider slider;
     public Gradient gradient;
     public Image fill;
@@ -28,6 +34,29 @@ public class HealthBarScript : MonoBehaviour
             PlayDestroySound();
             hasPlayedDestroySound = true; // Set the flag to true to indicate that the sound has been played
         }
+
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+
+            // Disable invincibility if timer runs out
+            if (invincibilityTimer <= 0f)
+            {
+                isInvincible = false;
+            }
+            UpdateInvincibilityTimerText();
+        }
+    }
+
+    void UpdateInvincibilityTimerText()
+    {
+        invincibilityTimerText.text = Mathf.CeilToInt(invincibilityTimer).ToString();
+    }
+    public void ActivateInvincibility(float duration)
+    {
+        isInvincible = true;
+        invincibilityDuration = duration;
+        invincibilityTimer = duration;
     }
     void PlayDestroySound()
     {
@@ -56,4 +85,15 @@ public class HealthBarScript : MonoBehaviour
         return slider.value;
     }
 
+    public void IncreaseHealth(int amount)
+    {
+        float newHealth = GetHealth() + amount;
+
+        // Ensure the new health value does not exceed the maximum
+        newHealth = Mathf.Clamp(newHealth, 0f, slider.maxValue);
+
+        // Set the new health value
+        SetHealth(newHealth);
+
+    }
 }

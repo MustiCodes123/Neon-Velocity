@@ -17,8 +17,10 @@ public class TakeDamage : MonoBehaviour
 
     public void TakeDamageForPlayer(int damage)
     {
-        if(currentHealth>=0)
-        currentHealth -= damage;
+        if (!healthBar.isInvincible)
+        { 
+        if (currentHealth >= 0)
+            currentHealth -= damage;
         Debug.Log(currentHealth);
         // Update the health bar UI
         healthBar.SetHealth(currentHealth);
@@ -28,6 +30,7 @@ public class TakeDamage : MonoBehaviour
         {
             Die();
         }
+    }
     }
 
     void Die()
