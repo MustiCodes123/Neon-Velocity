@@ -9,7 +9,8 @@ public class WallBounce : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void CollisionEnter2D(Collision collision)
+
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
