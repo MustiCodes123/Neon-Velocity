@@ -42,7 +42,7 @@ public class DroneController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         // Apply the movement direction to the drone's Rigidbody with constant velocity
-        //rb.velocity = transform.forward * moveSpeed;
+        rb.velocity = transform.forward * moveSpeed;
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
