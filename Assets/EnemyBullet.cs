@@ -27,6 +27,18 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World); // Move the bullet towards the target
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) // Assuming the player has the "Player" tag
+        {
+            // Decrease the player's health when hit by the bullet
+            other.GetComponent<TakeDamage>().TakeDamageForPlayer(5);
+
+            // Destroy the bullet after hitting the player
+            Destroy(gameObject);
+        }
+    }
+
     public void Seek(Transform _target)
     {
         target = _target; // Set the target for the bullet to seek
