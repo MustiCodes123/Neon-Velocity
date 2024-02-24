@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PotionPickup : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class PotionPickup : MonoBehaviour
     private void IncrementPotionCount()
     {
         potionCount++;
+        if(potionCount >= 10)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     private void UpdatePotionCountUI()
