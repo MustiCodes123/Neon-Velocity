@@ -9,15 +9,9 @@ public class ReverseTimerController : MonoBehaviour
 
     void Awake()
     {
-        string gameObjectName = gameObject.name;
-        Debug.Log("This script is attached to GameObject: " + gameObjectName);
         instance = this;
     }
 
-    public void setTime(float _time)
-    {
-        timer = _time;
-    }
     void Start()
     {
         UpdateTimerUI();
@@ -40,10 +34,13 @@ public class ReverseTimerController : MonoBehaviour
         timerText.text = seconds.ToString();
     }
 
-
     public float GetTimer()
     {
         return timer;
     }
 
+    public void setTime(float time)
+    {
+        timer += time;
+    }
 }

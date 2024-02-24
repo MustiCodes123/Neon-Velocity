@@ -18,6 +18,8 @@ public class PotionPickup : MonoBehaviour
         {
             if (sound != null)
             {
+                Debug.Log("POTION COLLECTED");
+
                 sound.Play();
                 IncrementPotionCount(); 
                 UpdatePotionCountUI();
@@ -28,7 +30,6 @@ public class PotionPickup : MonoBehaviour
 
     private void IncrementPotionCount()
     {
-        Debug.Log(potionCount);
         potionCount++; 
     }
 
