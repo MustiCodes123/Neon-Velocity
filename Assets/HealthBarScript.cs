@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class HealthBarScript : MonoBehaviour
 {
 
@@ -35,7 +36,15 @@ public class HealthBarScript : MonoBehaviour
         {
             PlayDestroySound();
             hasPlayedDestroySound = true; // Set the flag to true to indicate that the sound has been played
-            GameOverCanvas.enabled = true;
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name != "SampleScene")
+            {
+                GameOverCanvas.enabled = true;
+            }
+            else
+            {
+                SceneManager.LoadScene("Retro");
+            }
         }
 
         if (isInvincible)

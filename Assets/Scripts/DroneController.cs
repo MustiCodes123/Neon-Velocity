@@ -44,11 +44,6 @@ public class DroneController : MonoBehaviour
     }
     void Update()
     {
-        turn.x += Input.GetAxis("Mouse X");
-        turn.y += Input.GetAxis("Mouse Y");
-
-        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
-
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
