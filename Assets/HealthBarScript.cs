@@ -20,8 +20,10 @@ public class HealthBarScript : MonoBehaviour
     public AudioClip DestroySound;
     private bool hasPlayedDestroySound = false;
     private AudioSource audioSource;
+    public Canvas GameOverCanvas;
     private void Start()
     {
+        GameOverCanvas.enabled = false;
         startHealth = 100;
         SetHealth(startHealth);
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -33,6 +35,7 @@ public class HealthBarScript : MonoBehaviour
         {
             PlayDestroySound();
             hasPlayedDestroySound = true; // Set the flag to true to indicate that the sound has been played
+            GameOverCanvas.enabled = true;
         }
 
         if (isInvincible)

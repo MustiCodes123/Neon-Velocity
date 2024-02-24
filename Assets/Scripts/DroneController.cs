@@ -11,12 +11,26 @@ public class DroneController : MonoBehaviour
     public GameObject bulletPrefab;
     public float firerate = 5f;
     public float waittillNextFire = 0.0f;
-
+    public GameObject enemyBulletPrefab;
+    private bool collisionwithBullet = false;
     void Start()
     {
         drone = GetComponent<Drone>();
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void OnCOllisionEnter(Collider other)
+    {
+        if(other.gameObject != enemyBulletPrefab)
+        {
+            rb.velocity = Vector3.zero;
+            collisionwithBullet = false;
+        }
+        else
+        {
+            collisionwithBullet = true;
+        }
     }
 
     void ShootingBullets()
@@ -42,7 +56,10 @@ public class DroneController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         // Apply the movement direction to the drone's Rigidbody with constant velocity
-        rb.velocity = transform.forward * moveSpeed;
+        if(!collisionwithBullet)
+            rb.velocity = transform.forward * moveSpeed;
+        else
+            rb.velocity = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
