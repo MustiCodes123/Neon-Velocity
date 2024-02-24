@@ -9,10 +9,11 @@ public class TimeCollector : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("TIME COLLECTED");
 
 
-            timecontroller.setTime(timecontroller.GetTimer()+10);
+            timecontroller.setTime(5f);
+
+            Debug.Log("TIME COLLECTED" + timecontroller.GetTimer());
 
 
             Destroy(gameObject);

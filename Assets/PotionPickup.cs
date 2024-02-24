@@ -9,41 +9,46 @@ public class PotionPickup : MonoBehaviour
 
     private void Start()
     {
-        UpdatePotionCountUI(); 
+        UpdatePotionCountUI();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (sound != null)
-            {
-                Debug.Log("POTION COLLECTED");
-
-                sound.Play();
-                IncrementPotionCount(); 
-                UpdatePotionCountUI();
-                Destroy(gameObject); 
-            }
+            CollectPotion();
         }
+    }
+
+    private void CollectPotion()
+    {
+        Debug.Log("POTION COLLECTED");
+
+        if (sound != null)
+        {
+            sound.Play();
+        }
+
+        IncrementPotionCount();
+        UpdatePotionCountUI();
+        Destroy(gameObject);
     }
 
     private void IncrementPotionCount()
     {
-        potionCount++; 
+        potionCount++;
     }
 
     private void UpdatePotionCountUI()
     {
         if (potionCountText != null)
         {
-            potionCountText.text =  potionCount.ToString(); 
+            potionCountText.text = potionCount.ToString();
         }
     }
 
     public int GetPotionCount()
     {
-        return potionCount; 
+        return potionCount;
     }
-
 }
