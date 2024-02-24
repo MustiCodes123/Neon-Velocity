@@ -7,6 +7,20 @@ TagManager:
   - Enemy
   - PlayerCord
   - PlayerBullet
+  - RightBoundary
+  - BackBoundary
+  - cornfieldmud
+  - cornfield
+  - sheep
+  - LeftBoundary
+  - ReturnTag
+  - canvas
+  - Farmer
+  - AttackRadius
+  - canonbase
+  - Pickup
+  - Enemy Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX

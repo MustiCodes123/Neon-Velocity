@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class DestroyOnContact : MonoBehaviour
 {
-    public int damageAmount = 20; // Amount of damage to apply to the player
-    public GameObject impactEffect; // Effect to show on impact
-
+    public int damageAmount = 20; 
+    public GameObject impactEffect;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            // Destroy the enemy GameObject
             Destroy(other.gameObject);
 
-            // Instantiate impact effect
             Instantiate(impactEffect, transform.position, Quaternion.identity);
 
-            // Decrease player health
             TakeDamage takeDamageScript = GetComponent<TakeDamage>();
             if (takeDamageScript != null)
             {
