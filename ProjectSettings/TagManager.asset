@@ -21,6 +21,7 @@ TagManager:
   - Pickup
   - Enemy Bullet
   - Wall
+  - Endline
   layers:
   - Default
   - TransparentFX

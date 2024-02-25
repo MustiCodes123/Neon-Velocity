@@ -1,59 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PotionPickup : MonoBehaviour
 {
     public AudioSource sound;
-    public Text potionCountText; // Reference to the UI text element displaying potion count
-    private int potionCount = 0; // Variable to store the count of potions
-
-    private void Start()
-    {
-        UpdatePotionCountUI();
-    }
+    public PotionManager potionManager; // Reference to the PotionManager script
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            CollectPotion();
+            potionManager.IncrementPotionCount(); // Increment potion count using PotionManager
         }
     }
 
-    private void CollectPotion()
-    {
-        Debug.Log("POTION COLLECTED");
-
-        if (sound != null)
-        {
-            sound.Play();
-        }
-
-        IncrementPotionCount();
-        UpdatePotionCountUI();
-        Destroy(gameObject);
-    }
-
-    private void IncrementPotionCount()
-    {
-        potionCount++;
-        if(potionCount >= 10)
-        {
-            SceneManager.LoadScene("SampleScene");
-        }
-    }
-
-    private void UpdatePotionCountUI()
-    {
-        if (potionCountText != null)
-        {
-            potionCountText.text = potionCount.ToString();
-        }
-    }
-
-    public int GetPotionCount()
-    {
-        return potionCount;
-    }
+  
 }
