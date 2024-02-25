@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Retro.unity
     guid: c749bceb4fcccde4e8ea54044af4ecef
+  - enabled: 1
+    path: Assets/Scenes/Future.unity
+    guid: 535ba8a416f9ab445ad24bb5b14c7eb3
   m_configObjects: {}
