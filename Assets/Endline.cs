@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Endline : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Future");
         }
     }
 }

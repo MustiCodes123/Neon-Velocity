@@ -20,7 +20,7 @@ public class PotionManager : MonoBehaviour
 
         if (potionCount >= 10)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Future");
         }
     }
 
