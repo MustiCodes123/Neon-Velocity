@@ -12,4 +12,4 @@ public class Endline : MonoBehaviour
             SceneManager.LoadScene("Future");
         }
     }
-}
+} 
