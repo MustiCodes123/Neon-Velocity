@@ -5,7 +5,7 @@ using UnityEngine;
 public class TakeDamage : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
 
     public HealthBarScript healthBar; // Reference to the health bar script
     private void Start()
@@ -19,17 +19,13 @@ public class TakeDamage : MonoBehaviour
         if (!healthBar.isInvincible)
         {
             if (currentHealth >= 0)
-            {
-                currentHealth -= damage;
-            }
-        
-            healthBar.SetHealth(currentHealth);
+            currentHealth -= damage;
 
-             if (currentHealth <= 0)
-            {
-                 Die();
-            }
-    }
+            healthBar.SetHealth(currentHealth);
+        }
+        else {
+            Die();
+        }
     }
 
     void Die()

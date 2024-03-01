@@ -41,16 +41,22 @@ public class DroneController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        // Calculate movement direction
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        Vector3 movement = new Vector3(Mathf.Max(0, moveHorizontal), 0.0f, Mathf.Max(0, moveVertical));
 
-        // Apply the movement direction to the drone's Rigidbody with constant velocity
         rb.velocity = transform.forward * moveSpeed;
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
             drone.Move(speed);
         }
+
+        Vector3 newPosition = transform.position + movement;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -13f, 18f);
+        newPosition.y = Mathf.Clamp(newPosition.y, -5f, 20f);
+        transform.position = newPosition;
+
+
 
         if (Input.GetKey(KeyCode.Q))
             ShootingBullets();
