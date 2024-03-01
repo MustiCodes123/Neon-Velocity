@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  impactEffect: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
+  impactEffect: {fileID: 1319286667226607889, guid: 806b63b741ee4f44283eb8700dec0b18, type: 3}
   destroySound: {fileID: 8300000, guid: 5dbc74a65da58144aa0a20190bcd4909, type: 3}
 --- !u!82 &253969657940823763
 AudioSource:

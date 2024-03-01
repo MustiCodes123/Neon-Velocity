@@ -11,6 +11,7 @@ public class DroneController : MonoBehaviour
     public GameObject bulletPrefab;
     public float fireRate = 5f; // Bullets fired per second
     private float nextFireTime; // Time of the next allowed bullet fire
+    bool isColliding = false;
 
     void Start()
     {
@@ -53,5 +54,25 @@ public class DroneController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
             ShootingBullets();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Check if the collision is from the front
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if (Vector3.Dot(contact.normal, transform.forward) < -0.5f)
+            {
+                isColliding = true;
+                rb.velocity = Vector3.zero; // Stop movement in the colliding direction
+                break;
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        // Reset collision flag when no longer colliding
+        isColliding = false;
     }
 }
